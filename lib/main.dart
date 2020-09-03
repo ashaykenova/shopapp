@@ -167,24 +167,27 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
-      body: ListView(children: [
-        image_carousel,
+      body: Column(children: [
+//        image_carousel,
         //padding widget
         Padding(
           padding: const EdgeInsets.all(8.0),
-          child: Text('Categories'),
+          child: Container(
+            child: Text('Categories'),
+            alignment: Alignment.centerLeft,
+          ),
         ),
         HorizontalList(),
 
         Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Text('Recent products'),
+          padding: const EdgeInsets.all(8.0),
+          child: Container(
+            child: Text('Recent products'),
+            alignment: Alignment.centerLeft,
+          ),
         ),
 
-        Container(
-          height: 320.0,
-          child: Products(),
-        )
+        Flexible(child: Products()),
       ]),
     );
   }

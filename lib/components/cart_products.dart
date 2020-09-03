@@ -105,14 +105,12 @@ class Single_cart_product extends StatelessWidget {
             )
           ],
         ),
-        trailing: Column(
-          mainAxisSize: MainAxisSize.min,
-
-          children: [
-            IconButton(icon: Icon(Icons.arrow_drop_up), onPressed: () {}),
-            IconButton(icon: Icon(Icons.arrow_drop_down), onPressed: () {})
-          ],
-        ),
+//        trailing: Column(
+//          children: [
+//            IconButton(icon: Icon(Icons.arrow_drop_up), onPressed: () {}),
+//            IconButton(icon: Icon(Icons.arrow_drop_down), onPressed: () {})
+//          ],
+//        ),
       ),
     );
   }

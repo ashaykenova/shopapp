@@ -189,7 +189,9 @@ class _SignUpState extends State<SignUp> {
                               color: Colors.red.shade700,
                               elevation: 0.0,
                               child: MaterialButton(
-                                onPressed: (){},
+                                onPressed: () async {
+                                  validateForm();
+                                },
                                 minWidth: MediaQuery.of(context).size.width,
                                 child: Text(
                                   "Sign up",
@@ -245,19 +247,20 @@ class _SignUpState extends State<SignUp> {
       }
     });
   }
-/*
+
   Future validateForm() async {
     FormState formState = _formKey.currentState;
 
     if (formState.validate()) {
       formState.reset();
-      User currentUser = await firebaseAuth.currentUser();
+      User currentUser = await firebaseAuth.currentUser;
       if (currentUser == null) {
         firebaseAuth
             .createUserWithEmailAndPassword(
                 email: _emailTextController.text,
                 password: _passwordTextController.text)
             .then((user) => {
+                  print("tut1"),
                   _userServices.createUser({
                     "username": _nameTextController.text,
                     "email": _emailTextController.text,
@@ -265,11 +268,11 @@ class _SignUpState extends State<SignUp> {
                     "gender": gender,
                   })
                 })
-            .catchError((err) => {print(err.toString())});
+            .catchError((err) => {print("tutaaaa${err.toString()}")});
 
         Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => HomePage()));
       }
     }
-  }*/
+  }
 }

@@ -59,7 +59,7 @@ class _SignUpState extends State<SignUp> {
                               const EdgeInsets.fromLTRB(14.0, 8.0, 14.0, 8.0),
                           child: Material(
                             borderRadius: BorderRadius.circular(10.0),
-                            color: Colors.white.withOpacity(0.4),
+                            color: Colors.white,
                             elevation: 0.0,
                             child: Padding(
                               padding: const EdgeInsets.only(left: 12.0),
@@ -84,7 +84,7 @@ class _SignUpState extends State<SignUp> {
                               const EdgeInsets.fromLTRB(14.0, 8.0, 14.0, 8.0),
                           child: Material(
                             borderRadius: BorderRadius.circular(10.0),
-                            color: Colors.white.withOpacity(0.4),
+                            color: Colors.white,
                             elevation: 0.0,
                             child: Padding(
                               padding: const EdgeInsets.only(left: 12.0),
@@ -104,6 +104,7 @@ class _SignUpState extends State<SignUp> {
                                     else
                                       return null;
                                   }
+                                  return null;
                                 },
                               ),
                             ),
@@ -113,7 +114,7 @@ class _SignUpState extends State<SignUp> {
                           padding:
                               const EdgeInsets.fromLTRB(14.0, 8.0, 14.0, 8.0),
                           child: new Container(
-                            color: Colors.white.withOpacity(0.4),
+                            color: Colors.white,
                             child: Row(
                               children: <Widget>[
                                 Expanded(
@@ -121,7 +122,7 @@ class _SignUpState extends State<SignUp> {
                                   title: Text(
                                     "male",
                                     textAlign: TextAlign.end,
-                                    style: TextStyle(color: Colors.white),
+                                    style: TextStyle(color: Colors.black87),
                                   ),
                                   trailing: Radio(
                                       value: "male",
@@ -133,7 +134,7 @@ class _SignUpState extends State<SignUp> {
                                   title: Text(
                                     "female",
                                     textAlign: TextAlign.end,
-                                    style: TextStyle(color: Colors.white),
+                                    style: TextStyle(color: Colors.black87),
                                   ),
                                   trailing: Radio(
                                       value: "female",
@@ -149,7 +150,7 @@ class _SignUpState extends State<SignUp> {
                               const EdgeInsets.fromLTRB(14.0, 8.0, 14.0, 8.0),
                           child: Material(
                             borderRadius: BorderRadius.circular(10.0),
-                            color: Colors.white.withOpacity(0.4),
+                            color: Colors.white,
                             elevation: 0.0,
                             child: Padding(
                               padding: const EdgeInsets.only(left: 12.0),
@@ -262,8 +263,8 @@ class _SignUpState extends State<SignUp> {
             .then((user) => {
                   print("tut1"),
                   _userServices.createUser({
-                    "username": _nameTextController.text,
-                    "email": _emailTextController.text,
+                    "username": _nameTextController.toString(),
+                    "email": _emailTextController.toString(),
                     "userId": user.user.uid,
                     "gender": gender,
                   })

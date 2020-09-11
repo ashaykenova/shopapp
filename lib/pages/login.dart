@@ -26,9 +26,8 @@ class _LoginState extends State<Login> {
 
   @override
   void initState() {
-    print("tuta");
     super.initState();
-//    isSignedIn();
+    //isSignedIn();
   }
 
   void isSignedIn() async {
@@ -59,23 +58,16 @@ class _LoginState extends State<Login> {
       body: Stack(
         children: <Widget>[
           Image.asset(
-            'images/back.jpg',
+            'images/back.jpeg',
             fit: BoxFit.fill,
             width: double.infinity,
             height: double.infinity,
           ),
           Container(
-            color: Colors.black.withOpacity(0.8),
+            color: Colors.black.withOpacity(0.7),
             width: double.infinity,
             height: double.infinity,
           ),
-          Container(
-              alignment: Alignment.topCenter,
-              child: Image.asset(
-                'images/lg.png',
-                width: 280.0,
-                height: 240.0,
-              )),
           Center(
             child: Padding(
               padding: const EdgeInsets.only(top: 200.0),
@@ -89,7 +81,7 @@ class _LoginState extends State<Login> {
                               const EdgeInsets.fromLTRB(14.0, 8.0, 14.0, 8.0),
                           child: Material(
                             borderRadius: BorderRadius.circular(10.0),
-                            color: Colors.white.withOpacity(0.4),
+                            color: Colors.white,
                             elevation: 0.0,
                             child: Padding(
                               padding: const EdgeInsets.only(left: 12.0),
@@ -109,6 +101,7 @@ class _LoginState extends State<Login> {
                                     else
                                       return null;
                                   }
+                                  return null;
                                 },
                               ),
                             ),
@@ -120,7 +113,7 @@ class _LoginState extends State<Login> {
                               const EdgeInsets.fromLTRB(14.0, 8.0, 14.0, 8.0),
                           child: Material(
                             borderRadius: BorderRadius.circular(10.0),
-                            color: Colors.white.withOpacity(0.4),
+                            color: Colors.white,
                             elevation: 0.0,
                             child: Padding(
                               padding: const EdgeInsets.only(left: 12.0),

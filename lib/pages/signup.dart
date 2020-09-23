@@ -28,42 +28,33 @@ class _SignUpState extends State<SignUp> {
     return Scaffold(
       body: Stack(
         children: <Widget>[
-          Image.asset(
-            'images/back.jpg',
-            fit: BoxFit.fill,
-            width: double.infinity,
-            height: double.infinity,
-          ),
-          Container(
-            color: Colors.black.withOpacity(0.8),
-            width: double.infinity,
-            height: double.infinity,
-          ),
-          Container(
-              alignment: Alignment.topCenter,
-              child: Image.asset(
-                'images/lg.png',
-                width: 280.0,
-                height: 240.0,
-              )),
           Center(
-            child: Padding(
-              padding: const EdgeInsets.only(top: 200.0),
-              child: Center(
-                child: Form(
-                    key: _formKey,
-                    child: ListView(
-                      children: <Widget>[
-                        Padding(
-                          padding:
-                              const EdgeInsets.fromLTRB(14.0, 8.0, 14.0, 8.0),
-                          child: Material(
-                            borderRadius: BorderRadius.circular(10.0),
-                            color: Colors.white,
-                            elevation: 0.0,
-                            child: Padding(
-                              padding: const EdgeInsets.only(left: 12.0),
-                              child: TextFormField(
+            child: Center(
+              child: Form(
+                  key: _formKey,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Container(
+                            alignment: Alignment.topCenter,
+                            child: Image.asset(
+                              'images/cart.png',
+                              width: 120.0,
+                            )),
+                      ),
+                      Padding(
+                        padding:
+                            const EdgeInsets.fromLTRB(14.0, 8.0, 14.0, 8.0),
+                        child: Material(
+                          borderRadius: BorderRadius.circular(10.0),
+                          color: Colors.grey.withOpacity(0.2),
+                          elevation: 0.0,
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 12.0),
+                            child: ListTile(
+                              title: TextFormField(
                                 controller: _nameTextController,
                                 decoration: InputDecoration(
                                     hintText: "Full name",
@@ -79,16 +70,18 @@ class _SignUpState extends State<SignUp> {
                             ),
                           ),
                         ),
-                        Padding(
-                          padding:
-                              const EdgeInsets.fromLTRB(14.0, 8.0, 14.0, 8.0),
-                          child: Material(
-                            borderRadius: BorderRadius.circular(10.0),
-                            color: Colors.white,
-                            elevation: 0.0,
-                            child: Padding(
-                              padding: const EdgeInsets.only(left: 12.0),
-                              child: TextFormField(
+                      ),
+                      Padding(
+                        padding:
+                            const EdgeInsets.fromLTRB(14.0, 8.0, 14.0, 8.0),
+                        child: Material(
+                          borderRadius: BorderRadius.circular(10.0),
+                          color: Colors.grey.withOpacity(0.2),
+                          elevation: 0.0,
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 12.0),
+                            child: ListTile(
+                              title: TextFormField(
                                 controller: _emailTextController,
                                 decoration: InputDecoration(
                                     hintText: "Email",
@@ -110,114 +103,171 @@ class _SignUpState extends State<SignUp> {
                             ),
                           ),
                         ),
-                        Padding(
-                          padding:
-                              const EdgeInsets.fromLTRB(14.0, 8.0, 14.0, 8.0),
-                          child: new Container(
-                            color: Colors.white,
-                            child: Row(
-                              children: <Widget>[
-                                Expanded(
-                                    child: ListTile(
-                                  title: Text(
-                                    "male",
-                                    textAlign: TextAlign.end,
-                                    style: TextStyle(color: Colors.black87),
-                                  ),
-                                  trailing: Radio(
-                                      value: "male",
-                                      groupValue: groupValue,
-                                      onChanged: (e) => valueChanged(e)),
-                                )),
-                                Expanded(
-                                    child: ListTile(
-                                  title: Text(
-                                    "female",
-                                    textAlign: TextAlign.end,
-                                    style: TextStyle(color: Colors.black87),
-                                  ),
-                                  trailing: Radio(
-                                      value: "female",
-                                      groupValue: groupValue,
-                                      onChanged: (e) => valueChanged(e)),
-                                )),
-                              ],
+                      ),
+                      Padding(
+                        padding:
+                            const EdgeInsets.fromLTRB(14.0, 8.0, 14.0, 8.0),
+                        child: Material(
+                          borderRadius: BorderRadius.circular(10.0),
+                          color: Colors.grey.withOpacity(0.2),
+                          elevation: 0.0,
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 12.0),
+                            child: ListTile(
+                              title: TextFormField(
+                                controller: _passwordTextController,
+                                obscureText: hidePass,
+                                decoration: InputDecoration(
+                                    hintText: "Password",
+                                    icon: Icon(Icons.lock_outline),
+                                    border: InputBorder.none),
+                                validator: (value) {
+                                  if (value.isEmpty) {
+                                    return "The password field cannot be empty";
+                                  } else if (value.length < 6) {
+                                    return "the password has to be at least 6 characters long";
+                                  }
+                                  return null;
+                                },
+                              ),
+                              trailing: IconButton(
+                                  icon: Icon(Icons.remove_red_eye),
+                                  onPressed: () {
+                                    setState(() {
+                                      hidePass = false;
+                                    });
+                                  }),
                             ),
                           ),
                         ),
-                        Padding(
-                          padding:
-                              const EdgeInsets.fromLTRB(14.0, 8.0, 14.0, 8.0),
-                          child: Material(
-                            borderRadius: BorderRadius.circular(10.0),
-                            color: Colors.white,
+                      ),
+                      Padding(
+                        padding:
+                            const EdgeInsets.fromLTRB(14.0, 8.0, 14.0, 8.0),
+                        child: Material(
+                          borderRadius: BorderRadius.circular(10.0),
+                          color: Colors.grey.withOpacity(0.2),
+                          elevation: 0.0,
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 12.0),
+                            child: ListTile(
+                              title: TextFormField(
+                                controller: _confirmPasswordController,
+                                obscureText: hidePass,
+                                decoration: InputDecoration(
+                                    hintText: "Confirm Password",
+                                    icon: Icon(Icons.lock_outline),
+                                    border: InputBorder.none),
+                                validator: (value) {
+                                  if (value.isEmpty) {
+                                    return "The password field cannot be empty";
+                                  } else if (value.length < 6) {
+                                    return "the password has to be at least 6 characters long";
+                                  } else if (_passwordTextController.text !=
+                                      value) {
+                                    return ("The passwords do not match");
+                                  }
+                                  return null;
+                                },
+                              ),
+                              trailing: IconButton(
+                                  icon: Icon(Icons.remove_red_eye),
+                                  onPressed: () {
+                                    setState(() {
+                                      hidePass = false;
+                                    });
+                                  }),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding:
+                            const EdgeInsets.fromLTRB(14.0, 8.0, 14.0, 8.0),
+                        child: Material(
+                            borderRadius: BorderRadius.circular(20.0),
+                            color: Colors.deepOrange,
                             elevation: 0.0,
-                            child: Padding(
-                              padding: const EdgeInsets.only(left: 12.0),
-                              child: ListTile(
-                                title: TextFormField(
-                                  controller: _passwordTextController,
-                                  obscureText: hidePass,
-                                  decoration: InputDecoration(
-                                      hintText: "Password",
-                                      icon: Icon(Icons.lock_outline),
-                                      border: InputBorder.none),
-                                  validator: (value) {
-                                    if (value.isEmpty) {
-                                      return "The password field cannot be empty";
-                                    } else if (value.length < 6) {
-                                      return "the password has to be at least 6 characters long";
-                                    }
-                                    return null;
-                                  },
-                                ),
-                                trailing: IconButton(
-                                    icon: Icon(Icons.remove_red_eye),
-                                    onPressed: () {
-                                      setState(() {
-                                        hidePass = false;
-                                      });
-                                    }),
+                            child: MaterialButton(
+                              onPressed: () async {
+                                validateForm();
+                              },
+                              minWidth: MediaQuery.of(context).size.width,
+                              child: Text(
+                                "Sign up",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 20.0),
+                              ),
+                            )),
+                      ),
+                      Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: InkWell(
+                              onTap: () {
+                                Navigator.pop(context);
+                              },
+                              child: Text(
+                                "I already have an account",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(
+                                    color: Colors.deepOrange, fontSize: 15),
+                              ))),
+                      Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Divider(),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                "Or Sign Up With",
+                                style:
+                                    TextStyle(fontSize: 20, color: Colors.grey),
                               ),
                             ),
-                          ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Divider(
+                                color: Colors.black,
+                              ),
+                            ),
+                          ],
                         ),
-                        Padding(
-                          padding:
-                              const EdgeInsets.fromLTRB(14.0, 8.0, 14.0, 8.0),
-                          child: Material(
-                              borderRadius: BorderRadius.circular(20.0),
-                              color: Colors.red.shade700,
-                              elevation: 0.0,
-                              child: MaterialButton(
-                                onPressed: () async {
-                                  validateForm();
-                                },
-                                minWidth: MediaQuery.of(context).size.width,
-                                child: Text(
-                                  "Sign up",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 20.0),
-                                ),
-                              )),
-                        ),
-                        Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: InkWell(
-                                onTap: () {
-                                  Navigator.pop(context);
-                                },
-                                child: Text(
-                                  "Login",
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(color: Colors.blue),
-                                ))),
-                      ],
-                    )),
-              ),
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Padding(
+                            padding: EdgeInsets.all(8.0),
+                            child: Material(
+                                child: MaterialButton(
+                                    onPressed: () {},
+                                    child: Image.asset(
+                                      "images/fb.png",
+                                      width: 40,
+                                    ))),
+                          ) ,
+                         Padding(
+                           padding: EdgeInsets.all(8.0),
+                            child: Material(
+                                child: MaterialButton(
+                                    onPressed: () {},
+                                    child: Image.asset(
+                                      "images/ggg.png",
+                                      width: 40,
+                                    ))),
+
+                         ), ],
+                      ),
+                    ],
+                  )),
             ),
           ),
           Visibility(
@@ -253,24 +303,24 @@ class _SignUpState extends State<SignUp> {
     FormState formState = _formKey.currentState;
 
     if (formState.validate()) {
-      formState.reset();
-      User currentUser = await firebaseAuth.currentUser;
-      if (currentUser == null) {
+      User user = await firebaseAuth.currentUser;
+      if (user == null) {
         firebaseAuth
             .createUserWithEmailAndPassword(
                 email: _emailTextController.text,
                 password: _passwordTextController.text)
             .then((user) => {
-                  print("tut1"),
                   _userServices.createUser({
-                    "username": _nameTextController.toString(),
-                    "email": _emailTextController.toString(),
+                    "username": _nameTextController.text,
+                    "email": _emailTextController.text,
                     "userId": user.user.uid,
                     "gender": gender,
                   })
                 })
-            .catchError((err) => {print("tutaaaa${err.toString()}")});
-
+            .catchError((err) => {print('error is: ' + err.toString())});
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => HomePage()));
+      } else {
         Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => HomePage()));
       }

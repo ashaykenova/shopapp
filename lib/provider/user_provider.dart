@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -13,6 +15,7 @@ class UserProvider with ChangeNotifier {
   User get user => _user;
 
   Status get status => _status;
+  FirebaseFirestore _firestore = FirebaseFirestore.instance;
   UserServices _userServices = UserServices();
 
   UserProvider.initialize() : _auth = FirebaseAuth.instance {
@@ -41,12 +44,10 @@ class UserProvider with ChangeNotifier {
       await _auth
           .createUserWithEmailAndPassword(email: email, password: password)
           .then((user) {
-        Map<String, dynamic> values = {
-          "name": name,
-          "email": email,
-          "userId": user.user.uid
-        };
-        _userServices.createUser(values);
+        _firestore
+            .collection('users')
+            .doc(user.user.uid)
+            .set({'name': name, 'email': email, 'uid': user.user.uid});
       });
       return true;
     } catch (e) {
@@ -57,17 +58,17 @@ class UserProvider with ChangeNotifier {
     }
   }
 
-  Future signOut()async{
+  Future signOut() async {
     _auth.signOut();
     _status = Status.Unauthenticated;
     notifyListeners();
     return Future.delayed(Duration.zero);
   }
 
-  Future<void> _onStateChanged(User user) async{
-    if(user == null){
+  Future<void> _onStateChanged(User user) async {
+    if (user == null) {
       _status = Status.Unauthenticated;
-    }else{
+    } else {
       _user = user;
       _status = Status.Authenticated;
     }

@@ -1,12 +1,12 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:shopapp/pages/home.dart';
-import 'package:shopapp/pages/login.dart';
+import 'package:shopapp/screens/home.dart';
+import 'package:shopapp/screens/login.dart';
 import 'package:provider/provider.dart';
-import 'package:shopapp/pages/splash.dart';
+import 'package:shopapp/screens/splash.dart';
 import 'package:shopapp/provider/user_provider.dart';
 
-import 'commons/common.dart';
+import 'widgets/common.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();

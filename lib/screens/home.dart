@@ -1,12 +1,9 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:provider/provider.dart';
-import 'package:shopapp/commons/common.dart';
+import 'package:shopapp/widgets/common.dart';
 
-import 'package:shopapp/components/horizontal_listview.dart';
-import 'package:shopapp/components/products.dart';
-import 'package:shopapp/pages/cart.dart';
+import 'package:shopapp/widgets/products.dart';
 import 'package:shopapp/provider/user_provider.dart';
 import 'login.dart';
 

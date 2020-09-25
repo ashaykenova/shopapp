@@ -2,12 +2,13 @@ import 'dart:async';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
-import 'package:shopapp/commons/common.dart';
-import 'package:shopapp/commons/loading.dart';
+import 'package:shopapp/widgets/common.dart';
+import 'package:shopapp/widgets/loading.dart';
 import 'package:shopapp/db/auth.dart';
 import 'package:shopapp/db/users.dart';
-import 'package:shopapp/pages/home.dart';
+import 'package:shopapp/screens/home.dart';
 import 'package:shopapp/provider/user_provider.dart';
 
 class SignUp extends StatefulWidget {
@@ -35,32 +36,23 @@ class _SignUpState extends State<SignUp> {
           : Stack(
               children: <Widget>[
                 Padding(
-                  padding: const EdgeInsets.only(
-                      left: 20, right: 20.0, top: 80, bottom: 80),
+                  padding: const EdgeInsets.only(top: 30.0),
                   child: Container(
                     decoration: BoxDecoration(
                       color: Colors.white,
-                      borderRadius: BorderRadius.circular(16),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey[350],
-                          blurRadius:
-                              20.0, // has the effect of softening the shadow
-                        )
-                      ],
                     ),
                     child: Form(
                         key: _formKey,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                        child: ListView(
                           children: <Widget>[
+                            SizedBox(height: 40,),
                             Padding(
-                              padding: const EdgeInsets.all(20.0),
+                              padding: const EdgeInsets.all(16.0),
                               child: Container(
                                   alignment: Alignment.topCenter,
-                                  child: Image.asset(
-                                    'images/cart.png',
-                                    width: 120.0,
+                                  child: SvgPicture.asset(
+                                    'images/signup.svg',
+                                    width: 200.0,
                                   )),
                             ),
                             Padding(
@@ -165,7 +157,7 @@ class _SignUpState extends State<SignUp> {
                                   14.0, 8.0, 14.0, 8.0),
                               child: Material(
                                   borderRadius: BorderRadius.circular(20.0),
-                                  color: deepOrange,
+                                  color: black,
                                   elevation: 0.0,
                                   child: MaterialButton(
                                     onPressed: () async {
@@ -177,6 +169,7 @@ class _SignUpState extends State<SignUp> {
                                                   content:
                                                       Text("Sign up failed")));
                                       }
+                                      changeScreenReplacement(context, HomePage());
                                     },
                                     minWidth: MediaQuery.of(context).size.width,
                                     child: Text(
@@ -199,17 +192,13 @@ class _SignUpState extends State<SignUp> {
                                       "I already have an account",
                                       textAlign: TextAlign.center,
                                       style: TextStyle(
-                                          color: deepOrange, fontSize: 15),
+                                          color: black, fontSize: 15),
                                     ))),
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: <Widget>[
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Divider(),
-                                  ),
                                   Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: Text(
@@ -219,51 +208,34 @@ class _SignUpState extends State<SignUp> {
                                     ),
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Divider(
-                                      color: black,
-                                    ),
+                                    padding: EdgeInsets.all(8.0),
+                                    child: Material(
+                                        child: MaterialButton(
+                                            onPressed: () async {
+                                              User user =
+                                                  await auth.googleSignIn();
+                                              if (user == null) {
+                                                _userServices.createUser({
+                                                  "name": user.displayName,
+                                                  "photo": user.photoURL,
+                                                  "email": user.email,
+                                                  "userId": user.uid
+                                                });
+                                                changeScreenReplacement(
+                                                    context, HomePage());
+                                              }
+                                            },
+                                            child: Image.asset(
+                                              "images/ggg.png",
+                                              width: 40,
+                                            ))),
                                   ),
                                 ],
                               ),
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
-                              children: <Widget>[
-                                Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: Material(
-                                      child: MaterialButton(
-                                          onPressed: () {},
-                                          child: Image.asset(
-                                            "images/fb.png",
-                                            width: 40,
-                                          ))),
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: Material(
-                                      child: MaterialButton(
-                                          onPressed: () async {
-                                            User user =
-                                                await auth.googleSignIn();
-                                            if (user == null) {
-                                              _userServices.createUser({
-                                                "name": user.displayName,
-                                                "photo": user.photoURL,
-                                                "email": user.email,
-                                                "userId": user.uid
-                                              });
-                                              changeScreenReplacement(
-                                                  context, HomePage());
-                                            }
-                                          },
-                                          child: Image.asset(
-                                            "images/ggg.png",
-                                            width: 40,
-                                          ))),
-                                ),
-                              ],
+                              children: <Widget>[],
                             ),
                           ],
                         )),

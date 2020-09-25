@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shopapp/commons/common.dart';
 import 'package:shopapp/pages/product_details.dart';
 
 class Products extends StatefulWidget {
@@ -80,7 +81,7 @@ class Single_prod extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
+    return Container(
       child: Material(
         child: InkWell(
           onTap: () =>
@@ -93,22 +94,16 @@ class Single_prod extends StatelessWidget {
           })),
           child: GridTile(
               footer: Container(
-                  color: Colors.white,
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: Text(
-                          prod_name,
-                          style: TextStyle(
-                              fontWeight: FontWeight.bold, fontSize: 16.0),
-                        ),
-                      ),
-                      Text(
-                        "\$${prod_price}",
-                        style: TextStyle(
-                            color: Colors.red, fontWeight: FontWeight.bold),
-                      )
-                    ],
+                  color: white,
+                  child: ListTile(
+                    title: Text(
+                      prod_name,
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    trailing: Text(
+                      "\$$prod_price",
+                      style: TextStyle(color: deepOrange, fontSize: 17, fontWeight: FontWeight.w800),
+                    ),
                   )),
               child: Image.asset(
                 prod_picture,

@@ -1,11 +1,14 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_pro/carousel_pro.dart';
+import 'package:provider/provider.dart';
+import 'package:shopapp/commons/common.dart';
 
 import 'package:shopapp/components/horizontal_listview.dart';
 import 'package:shopapp/components/products.dart';
 import 'package:shopapp/pages/cart.dart';
-import 'package:shopapp/pages/login.dart';
+import 'package:shopapp/provider/user_provider.dart';
+import 'login.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -13,8 +16,10 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  TextEditingController _searchController = TextEditingController();
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<UserProvider>(context);
     Widget image_carousel = new Container(
       height: 200.0,
       child:  new Carousel(
@@ -26,9 +31,8 @@ class _HomePageState extends State<HomePage> {
           AssetImage('images/w4.jpeg'),
           AssetImage('images/m2.jpg'),
         ],
-        autoplay: false,
-//      animationCurve: Curves.fastOutSlowIn,
-//      animationDuration: Duration(milliseconds: 1000),
+        autoplay: true,
+        dotBgColor: Colors.transparent,
         dotSize: 4.0,
         indicatorBgPadding: 2.0,
       ),
@@ -36,20 +40,37 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       appBar: new AppBar(
+        iconTheme: IconThemeData(color: deepOrange),
         elevation: 0.1,
-        backgroundColor: Colors.red.shade900,
-        title: Text('Fashapp'),
+        backgroundColor: white,
+        title: Material(
+          borderRadius: BorderRadius.circular(10.0),
+          color: Colors.grey[50],
+          elevation: 0.0,
+          child:TextFormField(
+            controller: _searchController,
+            decoration: InputDecoration(
+                hintText: "Search...",
+                border: InputBorder.none),
+            validator: (value) {
+              if (value.isEmpty) {
+                return "The search field cannot be empty";
+              }
+              return null;
+            },
+          ),
+        ),
         actions: <Widget>[
-          new IconButton(
+          IconButton(
               icon: Icon(
                 Icons.search,
-                color: Colors.white,
+                color: deepOrange,
               ),
               onPressed: () {}),
           new IconButton(
               icon: Icon(
                 Icons.shopping_cart,
-                color: Colors.white,
+                color: deepOrange,
               ),
               onPressed: () {})
         ],
@@ -59,8 +80,8 @@ class _HomePageState extends State<HomePage> {
           children: <Widget>[
 //            header
             new UserAccountsDrawerHeader(
-              accountName: Text('Santos Enoque'),
-              accountEmail: Text('santosenoque.ss@gmail.com'),
+              accountName: Text('Altynay Shaikenova'),
+              accountEmail: Text('aaa123@gmail.com'),
               currentAccountPicture: GestureDetector(
                 child: new CircleAvatar(
                   backgroundColor: Colors.grey,
@@ -68,7 +89,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
               decoration: new BoxDecoration(
-                  color: Colors.red.shade900
+                  color: deepOrange
               ),
             ),
 
@@ -118,9 +139,7 @@ class _HomePageState extends State<HomePage> {
 
             InkWell(
               onTap: (){
-                FirebaseAuth.instance.signOut().then((value){
-                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Login()));
-                });
+                user.signOut();
               },
               child: ListTile(
                 title: Text('Log out'),
@@ -132,25 +151,29 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
 
-      body: new Column(
+      body: Column(
         children: <Widget>[
-          //image carousel begins here
-//          image_carousel,
+         image_carousel,
 
           //padding widget
-          new Padding(padding: const EdgeInsets.all(4.0),
-            child: Container(
-                alignment: Alignment.centerLeft,
-                child: new Text('Categories')),),
-
-          //Horizontal list view begins here
-          HorizontalList(),
+          // Padding(padding: const EdgeInsets.all(4.0),
+          //   child: Container(
+          //       alignment: Alignment.centerLeft,
+          //       child: Text('Categories')),),
+          //
+          // //Horizontal list view begins here
+          // HorizontalList(),
 
           //padding widget
-          new Padding(padding: const EdgeInsets.all(8.0),
-            child: Container(
-                alignment: Alignment.centerLeft,
-                child: new Text('Recent products')),),
+           Row(
+             children: [
+               Divider(),
+               Padding(padding: const EdgeInsets.all(14.0),
+                child: Container(
+                    alignment: Alignment.centerLeft,
+                    child: new Text('Recent products')),),
+             ],
+           ),
 
           //grid view
           Flexible(child: Products()),
